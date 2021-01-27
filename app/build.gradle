@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.apollographql.apollo'
 }
 
 android {
@@ -16,7 +17,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    apollo {
+        generateKotlinModels = true
+    }
+    buildFeatures{
+        dataBinding = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -39,7 +45,23 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle_version"
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava_version"
+
+    implementation "org.koin:koin-androidx-scope:$rootProject.koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$rootProject.koin_version"
+    implementation "org.koin:koin-androidx-ext:$rootProject.koin_version"
+
+    implementation "com.apollographql.apollo:apollo-runtime:$rootProject.apollo_version"
+    implementation "com.apollographql.apollo:apollo-android-support:$rootProject.apollo_version"
+    implementation "com.apollographql.apollo:apollo-rx2-support:$rootProject.apollo_version"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3_version"
 }
