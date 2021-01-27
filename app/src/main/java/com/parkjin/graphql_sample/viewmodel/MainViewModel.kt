@@ -24,12 +24,12 @@ class MainViewModel(
         val feedDisposable = feedRepository.getFeeds()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::handleDetailResponse)
+            .subscribe(this::handleData)
 
         disposable.add(feedDisposable)
     }
 
-    private fun handleDetailResponse(data: FeedResultQuery.Data) {
+    private fun handleData(data: FeedResultQuery.Data) {
         val results = data.characters?.results
         _name.value = results?.get(0)?.name
     }

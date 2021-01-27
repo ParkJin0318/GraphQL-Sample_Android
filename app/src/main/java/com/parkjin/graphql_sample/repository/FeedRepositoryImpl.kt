@@ -1,7 +1,6 @@
 package com.parkjin.graphql_sample.repository
 
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.rx2.rxQuery
 import com.parkjin.graphql_sample.FeedResultQuery
 import io.reactivex.Observable

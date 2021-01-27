@@ -1,20 +1,18 @@
 # GraphQL-Sample
 
-Android에서 GraphQL을 활용한 샘플 코드입니다.
-
 TEST 서버: https://rickandmortyapi.com/graphql/
 
-### Apollo Install
+### Install Apollo
 ```
 brew install apollo-cli
 ```
 
-### schema.json Download
+### Download schema.json
 ```
-apollo schema:download --endpoint=https://rickandmortyapi.com/graphql schema.json
+apollo schema:download --endpoint=서버주소 schema.json
 ```
 
-### Request
+### Create ~.graphql
 예시)
 ```graphql
 query FeedResult {
@@ -27,4 +25,26 @@ query FeedResult {
     }
   }
 }
+```
+
+### Request
+Callback
+```kotlin
+apolloClient.query(TestQuery())
+    .enqueue(object : ApolloCall.Callback<TestQuery.Data>() {
+        override fun onResponse(response: Response<TestQuery.Data>) {
+            ...
+        }
+
+        override fun onFailure(e: ApolloException) {
+            ...
+        }
+    })
+```
+Rx
+```kotlin
+apolloClient.rxQuery(TestQuery())
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(...)
 ```
